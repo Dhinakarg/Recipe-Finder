@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npm run dev --prefix \"Recipe finder\"",
+    "build": "npm run build --prefix \"Recipe finder\"",
+    "preview": "npm run preview --prefix \"Recipe finder\"",
+    "deploy": "npm run deploy --prefix \"Recipe finder\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

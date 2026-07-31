@@ -39,21 +39,12 @@ const App = () => {
   const fetchRecipes = async (query) => {
     setLoading(true);
     try {
-      if (!query || query.trim() === "") {
-        const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-        const requests = alphabet.map(l =>
-          fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${l}`).then(res => res.json())
-        );
-        const results = await Promise.all(requests);
-        const combined = results.reduce((acc, curr) => curr.meals ? [...acc, ...curr.meals] : acc, []);
-        setRecipes(combined);
-      } else {
-        const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
-        const data = await res.json();
-        setRecipes(data.meals || []);
-      }
+      const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query || '')}`);
+      const data = await res.json();
+      setRecipes(data.meals || []);
     } catch (err) {
       console.error("Fetch error:", err);
+      setRecipes([]);
     } finally {
       setLoading(false);
     }
@@ -94,7 +85,7 @@ const App = () => {
 
       {/* Hero Header */}
       <header className="py-12 text-center bg-white border-b border-gray-100 mb-8 px-4">
-        <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-2 tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-2 tracking-tight font-serif">
           Find. <span className="text-orange-500">Cook. </span>Enjoy.
         </h1>
         <p className="text-gray-400 font-medium italic">Your personal culinary companion.</p>
@@ -114,17 +105,17 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         {!showFavsOnly ? (
           <div className="flex items-center gap-2">
-            <div className="h-2 w-2 bg-orange-400 rounded-full animate-pulse"></div>
+            <div className={`h-2 w-2 rounded-full ${loading ? 'bg-orange-400 animate-pulse' : 'bg-green-500'}`}></div>
             <p className="text-gray-500 font-bold italic text-sm">
-              {searchTerm
-                ? `Showing results for "${searchTerm}"`
-                : "Discovering all available recipes..."
+              {loading 
+                ? (searchTerm ? `Searching recipes for "${searchTerm}"...` : "Discovering delicious recipes...")
+                : (searchTerm ? `Showing results for "${searchTerm}"` : "Showing curated collection of recipes")
               }
             </p>
           </div>
         ) : (
           <div className="flex flex-col gap-1 border-l-4 border-orange-500 pl-4 py-1">
-            <h2 className="text-3xl font-black text-gray-900 tracking-tight uppercase">Your Saved Kitchen</h2>
+            <h2 className="text-3xl font-black text-gray-900 tracking-tight uppercase font-serif">Your Saved Kitchen</h2>
             <p className="text-gray-400 text-sm font-bold">Manage your {favorites.length} favorite dishes</p>
           </div>
         )}

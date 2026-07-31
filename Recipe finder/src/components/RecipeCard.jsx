@@ -53,13 +53,21 @@ const RecipeCard = ({ recipe, isFavorite, toggleFavorite, onOpenDetails }) => {
             </span>
           </div>
           
-          <h2 className="text-2xl font-black text-gray-900 leading-[1.1] group-hover:text-orange-600 transition-colors duration-300">
+          <h2 className="text-2xl font-black text-gray-900 leading-[1.1] group-hover:text-orange-600 transition-colors duration-300 font-serif">
             {recipe.strMeal}
           </h2>
         </div>
         
         <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
-          Experience the authentic flavors of <span className="font-semibold text-gray-700">{recipe.strArea}</span> cuisine, crafted with traditional ingredients.
+          {recipe.strArea && recipe.strArea !== 'Unknown' ? (
+            <>
+              Experience the authentic flavors of <span className="font-semibold text-gray-700">{recipe.strArea}</span> cuisine, crafted with traditional ingredients.
+            </>
+          ) : (
+            <>
+              Experience authentic flavors from around the world, crafted with traditional ingredients.
+            </>
+          )}
         </p>
         
         <div className="mt-auto pt-6">

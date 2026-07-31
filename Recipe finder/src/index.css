@@ -1,4 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+  --font-serif: "Fraunces", serif;
+  --font-sans: "DM Sans", sans-serif;
+  --animate-bounce-short: bounce-short 0.3s ease-out;
+
+  @keyframes bounce-short {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+  }
+}
+
 body {
   background-color: #f9fafb;
   color: #1f2937;
