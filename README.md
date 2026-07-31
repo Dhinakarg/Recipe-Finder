@@ -20,17 +20,6 @@ RecipeBook is a modern, premium recipe discovery web application powered by **Th
 
 ---
 
-## ⚡ Technical Optimizations & Fixes
-
-1. **Startup Network Overhead Reduced by 95%**: 
-   - *Before*: The homepage used to fire **26 parallel fetches** (one for each letter of the alphabet) on start to populate its initial recipe feed, leading to slow startup times and rate-limiting blocks.
-   - *After*: Consolidated startup fetching to a single request querying `search.php?s=`, providing 25 popular default dishes instantly.
-2. **Detailed Modal Content**: Added full support for extracting ingredients and measurements (from `strIngredient1-20` and `strMeasure1-20`) to replace blank layouts.
-3. **Typography & Theme Configuration**: Integrated Google Fonts properly inside Tailwind CSS v4’s `@theme` directive, linking the headings and interface to high-end sans/serif families.
-4. **Grammar & Safety Improvements**: Corrected card description grammar for regions/areas (e.g. falls back elegantly for unknown categories) and resolved stuck pulsing loading states.
-
----
-
 ## 🚀 Getting Started
 
 ### Prerequisites
