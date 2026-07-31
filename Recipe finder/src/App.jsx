@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavBar from './components/NavBar';
 import SearchBar from './components/SearchBar';
 import RecipeCard from './components/RecipeCard';
-import RecipeContent from './components/RecipeContent';
+import RecipeContent from './components/RecipeContent'; 
 
 const App = () => {
   // --- Persistent State ---
